@@ -1,0 +1,12 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+    crl [separationInit] :
+    rl [separationInit] :
+    rl [separsationInit] :
+*** ^ keyword.control.statements.maude
+***     ^^^^^^^^^^^^^^^ entity.name.function.maude
+***                      ^ keyword.operator.maude
+    crl [birth] :
+*** ^^^ keyword.control.statements.maude
+***      ^^^^^ entity.name.function.maude
+***             ^ keyword.operator.maude

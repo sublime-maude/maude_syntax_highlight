@@ -13,11 +13,22 @@ contexts:
     - include: comments
 
   main:
+    - include: entity
     - include: strings
     - include: keywords
     - include: storage
     - include: constant
     - include: operators
+
+  entity:
+    - match: (rl|crl)
+      scope: keyword.control.statements.maude
+    - match: \[
+      set:
+        - match: \b[A-Za-z_][A-Za-z_0-9]*\b
+          scope: entity.name.function.maude
+        - match: \]
+          pop: true
 
   strings:
     # Strings begin and end with quotes, and use backslashes as an escape
