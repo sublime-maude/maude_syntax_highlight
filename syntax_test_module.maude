@@ -8,6 +8,8 @@ fmod EX12 is
     protecting INT .   
 *** ^^^^^^^^^^ keyword.control.imports.maude
 ***                ^ keyword.operator.maude
+***                 ^^^ - keyword.operator
+***                     Charahters after period should not be keyword.operator
     op double : Int -> Int .
 *** ^^ keyword.control.statements.maude
 ***           ^ keyword.operator.maude
@@ -25,6 +27,7 @@ fmod EX12 is
 *** ^^ keyword.control.statements.maude
 ***              ^^ keyword.operator.logical.maude
 ***                      ^ keyword.operator.maude
+***                       ^ - keyword.operator
     endfm
 *** ^^^^^ keyword.control.module.maude
 
