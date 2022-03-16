@@ -68,7 +68,7 @@ contexts:
       scope: constant.numeric.maude
 
   operators:
-    - match: '(:|(\-\>)|=|\/\\|\<|\>)|(\.\s*$)'
+    - match: '(:|(\-\>)|=|\/\\|\<|\>)|(\.)'
       scope: keyword.operator.maude
 
 
