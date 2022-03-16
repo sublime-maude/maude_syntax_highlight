@@ -89,25 +89,35 @@ contexts:
       scope: keyword.operator.logical.maude
 
   comments:
-    # block comments begin with ***( and end with )
-    - match: '\*\*\*\('
-      scope: punctuation.definition.comment.block.begin.maude
-      push: line_block
+    # block comments begin with ***( and end with ) The book sais that block
+    # comments should allways start with ***, but --- also works as block
+    # comments, which I also feel is more natural
+    # ref end of section 2.2 https://maude.lcc.uma.es/maude321-manual-html/maude-manualch2.html
+    - match: (((\*\*\*)|(\-\-\-))\s+\()
+      captures:
+        1: punctuation.definition.comment.begin.block.maude
+      push: block_comment
 
     # single line comments begin with *** or ---
-    - match: '(\*\*\*[^\(])|(\-\-\-)'
-      scope: punctuation.definition.comment.line.maude
+    - match: (\*\*\*)|(\-\-\-)
+      scope: punctuation.definition.comment.begin.line.maude
       push: line_comment
-
 
   line_comment:
     - meta_scope: comment.line.maude
     - match: '\n'
       pop: true
 
-  line_block:
+  block_comment:
     - meta_scope: comment.block.maude
-    - match: '\s*\)\s*\n'
-      scope: punctuation.definition.comment.end.maude
+    - match: '\('
+      push: comment_presesis
+    - match: '\)'
+      scope: punctuation.definition.comment.end.block.maude
       pop: true
 
+  comment_presesis:
+    - match: '\('
+      push: comment_presesis
+    - match: '\)'
+      pop: true
