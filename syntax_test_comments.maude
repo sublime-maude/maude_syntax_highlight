@@ -1,0 +1,74 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+comment.line.maude
+  punctuation.definition.comment.begin.line.maude
+
+comment.block.maude
+  punctuation.definition.comment.begin.block.maude
+  punctuation.definition.comment.end.block.maude
+
+test for single line comments
+
+    *** kjahdajkhd
+*** ^^^ punctuation.definition.comment.begin.line.maude
+*** ^^^^^^^^^^^^^^ comment.line.maude
+    --- kjahdajkhd
+*** ^^^ punctuation.definition.comment.begin.line.maude
+*** ^^^^^^^^^^^^^^ comment.line.maude
+
+
+
+Test for block comments with ---
+    --- (
+*** ^^^ punctuation.definition.comment.begin.block.maude
+*** ^^^^^ comment.block.maude
+      red double(3) .
+*** ^^^^^^^^^^^^^^^ comment.block.maude
+***   ^^^ - keyword.control
+    )
+*** ^ comment.block.maude
+*** ^ punctuation.definition.comment.end.block.maude
+
+
+Test for block comments with ***
+    --- (
+*** ^^^ punctuation.definition.comment.begin.block.maude
+*** ^^^^^ comment.block.maude
+      red double(3) .
+*** ^^^^^^^^^^^^^^^ comment.block.maude
+***   ^^^ - keyword.control
+    )
+*** ^ comment.block.maude
+*** ^ punctuation.definition.comment.end.block.maude
+
+    *** (
+*** ^^^ punctuation.definition.comment.begin.block.maude
+*** ^^^^^ comment.block.maude
+      red double(3) .
+*** ^^^^^^^^^^^^^^^ comment.block.maude
+***   ^^^ - keyword.control
+    )
+*** ^ comment.block.maude
+*** ^ punctuation.definition.comment.end.block.maude
+
+
+Test for block comments with code after the comment
+
+    *** (This is a comment ) red 1 + 1 .
+*** ^^^^^ punctuation.definition.comment.begin.block.maude
+*** ^^^^^^^^^^^^^^^^^^^^^^ comment.block.maude
+***                        ^ punctuation.definition.comment.end.block.maude
+
+    *** (This is a comment with matching ()  ((as) as)ad  c()mment) red 1 + 1 .
+*** ^^^^^ punctuation.definition.comment.begin.block.maude
+*** ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.maude
+***                                                               ^ punctuation.definition.comment.end.block.maude
+***                                                                 ^^^ keyword.control.statements.maude
+***                                                                 ^^^^^^^^^^^ - comment
+    *** (escaped charater does nothing \()) red 1 + 1 .
+*** ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.maude
+***                                         ^^^^^^^^^^^ - comment
+
+    ***(This is a comment) red 1 + 1 .
+*** ^^^^^^^^^^^^^^^^^^^^^^ comment.block.maude
+***                        ^^^^^^^^^ - comment
