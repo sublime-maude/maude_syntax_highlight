@@ -1,0 +1,46 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+
+    op si^$%#ngle : -> Status .
+
+    op single : -> Status .
+*** ^^ keyword.control.maude punctuation.operation.start
+***    ^^^^^^ entity.name.function.maude
+***           ^ keyword.operator.maude
+***             ^^ keyword.operator.maude
+***                ^^^^^^ variable.parameter.maude
+***                       ^ keyword.operator.maude punctuation.operation.end
+
+
+    op single : -> Status [ctor] .
+***                       ^ punctuation.operation.extra.start
+***                        ^^^^ keyword.control.ctor.maude
+***                            ^ punctuation.operation.extra.end
+***                              ^ keyword.operator.maude punctuation.operation.end
+
+    op _ _ : Oid Oid -> Oid [ctor assoc comm id: none] .
+*** ^^ keyword.control.maude punctuation.operation.start
+***    ^^^ entity.name.function.maude
+***        ^ keyword.operator.maude
+***          ^^^ variable.parameter.maude
+***              ^^^ variable.parameter.maude
+***                  ^^ keyword.operator.maude
+***                     ^^^ variable.parameter.maude
+***                         ^ punctuation.operation.extra.start
+***                          ^^^^ keyword.control.ctor.maude
+***                               ^^^^^ keyword.control.assoc.maude
+***                                     ^^^^ keyword.control.comm.maude
+***                                          ^^ keyword.control.idendtity.maude
+***                                                  ^ punctuation.operation.extra.end
+***                                                    ^ keyword.operator.maude punctuation.operation.end
+
+    op single : -> Status [ctor assoc lk id: no:ne ] .
+***                                   ^^ invalid.illegal
+
+*** parse all of the name as a one entry
+    op _ is less then _ : Oid -> Status [ctor] .
+***    ^^^^^^^^^^^^^^^^ entity.name.function.maude
+
+*** maybe ops can't have nameswith spaces so we should parse these as separate enties
+    ops engaged married separated : Oid -> Status [ctor] .
+***     ^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.function.maude
