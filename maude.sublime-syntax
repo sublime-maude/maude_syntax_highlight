@@ -24,11 +24,15 @@ contexts:
     - match: (rl|crl)
       scope: keyword.control.statements.maude
     - match: \[
-      set:
-        - match: \b[A-Za-z_][A-Za-z_0-9]*\b
-          scope: entity.name.function.maude
-        - match: \]
-          pop: true
+      push: rule_label
+
+  rule_label:
+    - meta_content_scope: entity.name.function.maude
+    - match: ([A-Za-z0-9-_!&^@#=$%*'+~/\\|?<>:;]*)
+    - match: \]
+      pop: true
+    - match: .
+      scope: invalid.illegal
 
   strings:
     # Strings begin and end with quotes, and use backslashes as an escape
