@@ -7,7 +7,13 @@
 *** ^^ keyword.control.maude punctuation.operation.start
 ***    ^^^^^^ entity.name.function.maude
 ***           ^ keyword.operator.maude
-***             ^^ keyword.operator.maude
+***             ^^ keyword.operator.total-operatior.maude
+***                ^^^^^^ variable.parameter.maude
+***                       ^ keyword.operator.maude punctuation.operation.end
+
+    op single : ~> Status .
+***           ^ keyword.operator.maude
+***             ^^ keyword.operator.partiell-operatior.maude
 ***                ^^^^^^ variable.parameter.maude
 ***                       ^ keyword.operator.maude punctuation.operation.end
 
@@ -24,7 +30,7 @@
 ***        ^ keyword.operator.maude
 ***          ^^^ variable.parameter.maude
 ***              ^^^ variable.parameter.maude
-***                  ^^ keyword.operator.maude
+***                  ^^ keyword.operator.total-operatior.maude
 ***                     ^^^ variable.parameter.maude
 ***                         ^ punctuation.operation.extra.start
 ***                          ^^^^ keyword.control.ctor.maude
