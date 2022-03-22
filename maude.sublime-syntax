@@ -39,7 +39,11 @@ contexts:
 
   operators_args:
     - match: (->)
-      scope: keyword.operator.maude
+      scope: keyword.operator.total-operatior.maude
+      push: operators_signature
+      pop: true
+    - match: (~>)
+      scope: keyword.operator.partiell-operatior.maude
       push: operators_signature
       pop: true
 
