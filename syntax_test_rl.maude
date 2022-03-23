@@ -38,3 +38,25 @@
 ***                     ^ invalid.illegal
 ***                                                                          ^ invalid.illegal
 *** This should have been valid but we don't want to bother with supporting that
+
+    --- Player gets his second card and starts the real game:
+    rl [playerSecond] :
+       < T : Table | shoe : CARDS, rndIndex : N >
+       < P : Player | hand : CARD >
+       < D : Dealer | hand : CARD2 >
+     =>
+***  ^^ keyword.control.maude
+       < T : Table | shoe : remove(getRandomCard(CARDS, N), CARDS), rndIndex : s N, turn : P >
+       < P : Player | hand : CARD :: getRandomCard(CARDS, N) >
+       < D : Dealer | > .
+
+     crl [playerStand] :
+         < T : Table | turn : P >
+         < P : Player | hand : CARDS2 >
+         < D : Dealer | >
+       =>
+***    ^^ keyword.control.maude
+         < T : Table | turn : D >
+         < P : Player | >
+         < D : Dealer | >
+        if leastValue(CARDS2) >= 15 or boestValue(CARDS2) >= 18 .

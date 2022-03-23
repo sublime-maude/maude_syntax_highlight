@@ -15,7 +15,7 @@ fmod EX12 is
 ***    ^^^^^^ entity.name.function.maude
 ***           ^ keyword.operator.maude
 ***             ^^^ variable.parameter.maude
-***                 ^^ keyword.operator.maude
+***                 ^^ keyword.operator.total-operatior.maude
 ***                    ^^^ variable.parameter.maude
 ***                        ^ keyword.operator.maude
 
