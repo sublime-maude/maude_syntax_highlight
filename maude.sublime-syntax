@@ -109,6 +109,8 @@ contexts:
 
   block_comment:
     - meta_scope: comment.block.maude
+    - match: '`.'
+      scope: constant.character.escape.maude
     - match: '\('
       push: comment_presesis
     - match: '\)'
