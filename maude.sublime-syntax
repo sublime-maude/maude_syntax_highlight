@@ -67,6 +67,16 @@ contexts:
             - match: ": "
             - match: ([A-Za-z0-9-_!&^@#=$%*'+~/\\|?<>:;]*)
               pop: true
+        - match: format
+          scope: keyword.control.format.maude
+          push:
+            - match: \(
+              scope: meta.format.start_parenthesis
+              set:
+              - match: \)
+                scope: meta.format.end_parenthesis
+                pop: true
+
         - match: \]
           scope: punctuation.operation.extra.end
           pop: true
