@@ -5,6 +5,27 @@ name: Maude
 file_extensions: [maude, ]
 scope: source.maude
 
+
+# we need to remove the:
+# - ` (back quote character) \x96
+# - {} \x7B \x7D
+# - () \x28 \x29
+# - [] \x5B \x5D
+# - , (comma) \x82
+
+variables:
+  special_chars: '[\`\{\}\(\)\[\]\,]'
+  # escaped_chars: '(?:`\{|`\}|`\(|`\)|`\[|`\]|`\,|` )'
+  escaped_chars: '((`\{)|(`\})|(`\()|(`\))|(`\[)|(`\])|(`\,)|(` ))'
+  nonspecial_chars: '[\x00-\x19\x21-\x27\x30-\x5A\x5C\x5E\x5F\x61-\x7A\x7C\x7E-\x7F]'
+  all_valid_chars: '{{nonspecial_chars}}{{escaped_chars}}'
+  identifier_continue: '[{{all_valid_chars}}]'
+  identifier: '\b[{{all_valid_chars}}]{{identifier_continue}}*\b'
+  identifiers: '\b{{identifier}}({{identifier}}{{special_chars}})*'
+
+  OpId: '(_)?[{{identifier}}](_)?|__[{{identifier}}]|[{{identifier}}]__'
+  OpForm: '({{OpId}}|(\s*\(\s*{{OpId}}\s*\)\s*))+'
+
 contexts:
   # The prototype context is prepended to all contexts but those setting
   # meta_include_prototype: false.
@@ -12,6 +33,11 @@ contexts:
     - include: comments
 
   main:
+    - meta_include_prototype: false
+    - match: ''
+      push: [statements, ]
+
+  statements:
     - include: rule
     - include: operators
     - include: strings
@@ -23,18 +49,38 @@ contexts:
   operators:
     - match: (op|ops)\b
       scope: keyword.control.maude punctuation.operation.start
-      push: operators_name
+      push:
+        - meta_scope: meta.operator.maude
+        - match: '\.'
+          scope: keyword.operator.maude punctuation.operation.end
+          pop: true
+        - match: \s
+        - match: '(\:)'
+          scope: keyword.operator.maude
+          push: operators_args
+          pop: true
+        - match: "(?={{identifier}})"
+          push:
+            - meta_content_scope: entity.name.function.maude
+            - include: entity-name-function
+            - match: ''
+              pop: true
+        # scope: entity.name.function.maude
+        # skip the space before and anything until :
+        # - match: \b([^:]*)\b
+        #   scope: entity.name.function.maude
 
-  operators_name:
-    - match: (\:)
-      scope: keyword.operator.maude
-      push: operators_args
-      pop: true
+  entity-name-function:
+    - include: generic-names
 
-    - match: ' '
-      # skip the space before and anything until :
-    - match: \b([^:]*)\b
-      scope: entity.name.function.maude
+  generic-names:
+    - match: '{{identifier}}'
+      scope: meta.generic-name.maude
+
+  # generic-name:
+  #   - match: '{{identifier}}'
+  #     scope: meta.generic-name.maude
+  #     pop: true
 
   operators_args:
     - match: (->)
@@ -45,8 +91,8 @@ contexts:
       scope: keyword.operator.partiell-operatior.maude
       push: operators_signature
       pop: true
-
     - match: \S+
+      meta_content_scope: meta.function.parameters.python
       scope: variable.parameter.maude
 
   operators_signature:
