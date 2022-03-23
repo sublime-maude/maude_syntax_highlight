@@ -1,0 +1,40 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+    crl [separation-init-12] :
+*** ^^^ keyword.control.statements.maude
+***      ^^^^^^^^^^^^^^^^^^ entity.name.function.maude
+***                          ^ keyword.operator.maude
+
+    rl [separsationInit] :
+*** ^ keyword.control.statements.maude
+***     ^^^^^^^^^^^^^^^ entity.name.function.maude
+***                      ^ keyword.operator.maude
+    crl [birth] :
+*** ^^^ keyword.control.statements.maude
+***      ^^^^^ entity.name.function.maude
+***             ^ keyword.operator.maude
+
+
+    crl [!^-_-@#!@#$%^&*+'~/\|?<>:;1234567890123] :
+*** ^^^ keyword.control.statements.maude
+***      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.function.maude - invalid.illegal
+
+    crl [this is illegal 👍(){}[`]] :
+*** ^^^ keyword.control.statements.maude
+***      ^^^^^^^^^^^^^^^^^^^^^^^ entity.name.function.maude
+***          ^ invalid.illegal
+***             ^ invalid.illegal
+***                     ^^^^^^^^ invalid.illegal
+***                                ^ keyword.operator.maude
+
+    crl [rules_with_] : _wil_have_a_bad_time] .
+*** ^^^ keyword.control.statements.maude
+*** can't do much with this since this could be a valid program
+
+
+
+    crl [iliegea_to_have"in_the_name_It_actuale_work_you_you_have_them_in_par"] :
+*** ^^^ keyword.control.statements.maude
+***                     ^ invalid.illegal
+***                                                                          ^ invalid.illegal
+*** This should have been valid but we don't want to bother with supporting that
