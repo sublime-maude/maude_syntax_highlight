@@ -1,0 +1,9 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+mod ER is
+endm eof --adad
+***  ^^^ keyword.control.end_of_file
+***      ^^^^^^^ text.plain
+
+    red 1 + 10 .
+***^^^^^^^^^^^^^ text.plain

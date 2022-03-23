@@ -19,6 +19,7 @@ contexts:
     - include: storage
     - include: constant
     - include: operators
+    - include: end_of_file
 
   entity:
     - match: (rl|crl)
@@ -122,3 +123,9 @@ contexts:
       push: comment_presesis
     - match: '\)'
       pop: true
+
+  end_of_file:
+    - match: eof
+      scope: keyword.control.end_of_file
+      push:
+        - meta_content_scope: text.plain

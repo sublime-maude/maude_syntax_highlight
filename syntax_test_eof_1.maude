@@ -1,0 +1,7 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+    eof
+*** ^^^ keyword.control.end_of_file
+
+    red 1 + 1 .
+*** ^^^^^^^^^^^ text.plain
