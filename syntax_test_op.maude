@@ -50,3 +50,9 @@
 *** maybe ops can't have nameswith spaces so we should parse these as separate enties
     ops engaged married separated : Oid -> Status [ctor] .
 ***     ^^^^^^^^^^^^^^^^^^^^^^^^^ entity.name.function.maude
+
+  op <_,_> : Suit Value -> Card [ctor assoc comm format ( no o o o o o)]  .
+***                                              ^^^^^^ keyword.control.format.maude
+***                                              ^^^^^^^^^^^^^^^^^^^^^^ - invalid
+***                                                     ^ meta.format.start_parenthesis
+***                                                                   ^ meta.format.start_parenthesis
