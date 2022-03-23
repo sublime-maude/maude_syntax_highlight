@@ -159,8 +159,6 @@ contexts:
         1: keyword.operator.maude meta.logical_operators.maude
     - match: ':'
       scope: keyword.operator.maude meta.logical_operators.maude
-    - match: ':'
-      scope: keyword.operator.maude meta.logical_operators.maude
     - match: '->'
       scope: keyword.operator.maude meta.logical_operators.maude
     - match: '=='
