@@ -135,8 +135,11 @@ contexts:
     - match: '\b(var|vars|eq|ceq|cmb|reduce|red|rewrite|rew)\b'
       scope: keyword.control.statements.maude
 
-    - match: '\b(if|else|for|while)\b'
+    - match: '\b(if|then|else|fi|for|while)\b'
       scope: keyword.control.flow.maude
+
+    - match: '=\>'
+      scope: keyword.control.maude
 
   storage:
     - match: '\b(Bool|Nat|Zero|NzNat|Int|NzInt|Rat|PosRat|NzRat|Float|FiniteFloat|String|Char|Qid|List\{.+\}|NeList\{.+\}|NatList|Bool|Universal)\b'
@@ -150,9 +153,32 @@ contexts:
       scope: constant.numeric.maude
 
   logical_operators:
-    - match: '(:|(\-\>)|=|\/\\|\<|\>)|(\.)'
-      scope: keyword.operator.maude logical_operators
-
+    - match: (\.\s*$)
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: ':'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: ':'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '->'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=/='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\/\\' # /\ Locical and
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\\\/' # /\ Locical or
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=\>'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\<='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\>='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\<'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\>'
+      scope: keyword.operator.maude meta.logical_operators.maude
 
   comments:
     # block comments begin with ***( and end with )

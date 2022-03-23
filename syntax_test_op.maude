@@ -55,4 +55,4 @@
 ***                                              ^^^^^^ keyword.control.format.maude
 ***                                              ^^^^^^^^^^^^^^^^^^^^^^ - invalid
 ***                                                     ^ meta.format.start_parenthesis
-***                                                                   ^ meta.format.start_parenthesis
+***                                                                   ^ meta.format.end_parenthesis

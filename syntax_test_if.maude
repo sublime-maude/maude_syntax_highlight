@@ -1,0 +1,39 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+    eq bestValue(HAND) = if
+*** ^^ keyword.control.statements.maude
+***                      ^^ keyword.control.flow.maude
+        leastValue(HAND) =/= largestValue(HAND) and leastValue(HAND) <= 11
+      then
+***   ^^^^ keyword.control.flow.maude
+        leastValue(HAND) + 10
+      else
+***   ^^^^ keyword.control.flow.maude
+        leastValue(HAND)
+      fi .
+***   ^^ keyword.control.flow.maude
+
+
+eq bestValue(HAND) = if 1 =/= 2 then true else false fi .
+***                       ^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 == 2 then true else false fi .
+***                       ^^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 /\ 2 then true else false fi .
+***                       ^^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 \/ 2 then true else false fi .
+***                       ^^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 < 2 then true else false fi .
+***                       ^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 > 2 then true else false fi .
+***                       ^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 <= 2 then true else false fi .
+***                       ^^ keyword.operator.maude meta.logical_operators
+
+eq bestValue(HAND) = if 1 >= 2 then true else false fi .
+***                       ^^ keyword.operator.maude meta.logical_operators
