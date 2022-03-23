@@ -1,0 +1,5 @@
+{
+  "cmd": ["maude", "$file"],
+  "file_regex": "Warning: \"(...*?)\", line ([0-9]*)",
+  "selector": "source.maude",
+}

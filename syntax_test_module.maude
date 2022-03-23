@@ -1,0 +1,37 @@
+*** SYNTAX TEST "maude.sublime-syntax"
+
+
+fmod EX12 is
+***       ^^ keyword.control.module.maude
+*** <- keyword.control.module
+   *** <- keyword.control.module.maude
+    protecting INT .   
+*** ^^^^^^^^^^ keyword.control.imports.maude
+***                ^ keyword.operator.maude
+***                 ^^^ - keyword.operator
+***                     Charahters after period should not be keyword.operator
+    op double : Int -> Int .
+*** ^^ keyword.control.statements.maude
+***           ^ keyword.operator.maude
+***             ^^^ storage.type.maude
+***                 ^^ keyword.operator.maude
+***                    ^^^ storage.type.maude
+***                        ^ keyword.operator.maude
+
+    var N : Int .
+*** ^^^ keyword.control.statements.maude
+***       ^ keyword.operator.maude
+***         ^^^ storage.type.maude
+***             ^ keyword.operator.maude
+    eq double(N) = N + N . 
+*** ^^ keyword.control.statements.maude
+***              ^ keyword.operator.maude
+***                      ^ keyword.operator.maude
+***                       ^ - keyword.operator
+    endfm
+*** ^^^^^ keyword.control.module.maude
+
+    red double(3) .
+*** ^^^ keyword.control.statements.maude
+***            ^ constant.numeric.maude
+***               ^ keyword.operator.maude
