@@ -6,22 +6,89 @@ file_extensions: [maude, ]
 scope: source.maude
 
 contexts:
-
   # The prototype context is prepended to all contexts but those setting
   # meta_include_prototype: false.
   prototype:
     - include: comments
 
   main:
-    - include: entity
+    - include: rule
+    - include: operators
     - include: strings
     - include: keywords
     - include: storage
     - include: constant
-    - include: operators
+    - include: logical_operators
     - include: end_of_file
 
-  entity:
+  operators:
+    - match: (op|ops)\b
+      scope: keyword.control.maude punctuation.operation.start
+      push: operators_name
+
+  operators_name:
+    - match: (\:)
+      scope: keyword.operator.maude
+      push: operators_args
+      pop: true
+
+    - match: ' '
+      # skip the space before and anything until :
+    - match: \b([^:]*)\b
+      scope: entity.name.function.maude
+
+  operators_args:
+    - match: (->)
+      scope: keyword.operator.total-operatior.maude
+      push: operators_signature
+      pop: true
+    - match: (~>)
+      scope: keyword.operator.partiell-operatior.maude
+      push: operators_signature
+      pop: true
+
+    - match: \S+
+      scope: variable.parameter.maude
+
+  operators_signature:
+    - match: \[
+      scope: punctuation.operation.extra.start
+      push:
+        - match: ' '
+        - match: ctor
+          scope: keyword.control.ctor.maude
+        - match: assoc
+          scope: keyword.control.assoc.maude
+        - match: comm
+          scope: keyword.control.comm.maude
+        - match: (left |right )?id
+          scope: keyword.control.idendtity.maude
+          push:
+            - match: ": "
+            - match: ([A-Za-z0-9-_!&^@#=$%*'+~/\\|?<>:;]*)
+              pop: true
+        - match: format
+          scope: keyword.control.format.maude
+          push:
+            - match: \(
+              scope: meta.format.start_parenthesis
+              set:
+              - match: \)
+                scope: meta.format.end_parenthesis
+                pop: true
+
+        - match: \]
+          scope: punctuation.operation.extra.end
+          pop: true
+        - match: .
+          scope: invalid.illegal
+    - match: \.
+      scope: keyword.operator.maude punctuation.operation.end
+      pop: true
+    - match: \S+
+      scope: variable.parameter.maude
+
+  rule:
     - match: (rl|crl)
       scope: keyword.control.statements.maude
     - match: \[
@@ -66,11 +133,14 @@ contexts:
     - match: '\b(sort|subsort|sorts|subsorts)\b'
       scope: keyword.control.sorts.maude
 
-    - match: '\b(op|ops|var|vars|eq|ceq|rl|crl|cmb|reduce|red|rewrite|rew)\b'
+    - match: '\b(var|vars|eq|ceq|cmb|reduce|red|rewrite|rew)\b'
       scope: keyword.control.statements.maude
 
-    - match: '\b(if|else|for|while)\b'
+    - match: '\b(if|then|else|fi|for|while)\b'
       scope: keyword.control.flow.maude
+
+    - match: '=\>'
+      scope: keyword.control.maude
 
   storage:
     - match: '\b(Bool|Nat|Zero|NzNat|Int|NzInt|Rat|PosRat|NzRat|Float|FiniteFloat|String|Char|Qid|List\{.+\}|NeList\{.+\}|NatList|Bool|Universal)\b'
@@ -83,10 +153,34 @@ contexts:
     - match: '\b([0-9]+)\b'
       scope: constant.numeric.maude
 
-  operators:
-    - match: '(:|(\-\>)|=|\/\\|\<|\>)|(\.)'
-      scope: keyword.operator.maude
-
+  logical_operators:
+    - match: (\.)\s*$
+      captures:
+        1: keyword.operator.maude meta.logical_operators.maude
+    - match: ':'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '->'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=/='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\/\\' # /\ Locical and
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\\\/' # /\ Locical or
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '=\>'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\<='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\>='
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\<'
+      scope: keyword.operator.maude meta.logical_operators.maude
+    - match: '\>'
+      scope: keyword.operator.maude meta.logical_operators.maude
 
   comments:
     # block comments begin with ***( and end with ) The book sais that block

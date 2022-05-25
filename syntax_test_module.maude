@@ -11,11 +11,12 @@ fmod EX12 is
 ***                 ^^^ - keyword.operator
 ***                     Charahters after period should not be keyword.operator
     op double : Int -> Int .
-*** ^^ keyword.control.statements.maude
+*** ^^ keyword.control.maude punctuation.operation.start
+***    ^^^^^^ entity.name.function.maude
 ***           ^ keyword.operator.maude
-***             ^^^ storage.type.maude
-***                 ^^ keyword.operator.maude
-***                    ^^^ storage.type.maude
+***             ^^^ variable.parameter.maude
+***                 ^^ keyword.operator.total-operatior.maude
+***                    ^^^ variable.parameter.maude
 ***                        ^ keyword.operator.maude
 
     var N : Int .
